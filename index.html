@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>don't be a meat proxy</title>
+<meta name="description" content="Please don't copy-paste AI answers at people. Read it, understand it, check it, then say it in your own words.">
+<meta property="og:title" content="don't be a meat proxy">
+<meta property="og:description" content="Please don't copy-paste AI answers at people.">
+<meta property="og:url" content="https://dontbeameatproxy.net/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥩</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1b1b1f;
+    --muted: #6f6f78;
+    --line: #eaeaef;
+    --select: #cde3ff;
+    --bad: #c2413b;
+    --good: #2f8f57;
+    --avatar-a: #fdeee6;
+    --avatar-b: #e6f0fd;
+    --display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.125rem;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--select); }
+
+  .wrap {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---- header ---- */
+  header {
+    padding: 6.5rem 0 4rem;
+    text-align: center;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+  /* "meat proxy" gets selected for copying... */
+  h1 .selected {
+    padding: 0 0.12em;
+    border-radius: 3px;
+    background: linear-gradient(var(--select), var(--select)) no-repeat left center / 0% 100%;
+    animation: select-sweep 0.45s ease-out 0.2s forwards;
+  }
+  @keyframes select-sweep {
+    to { background-size: 100% 100%; }
+  }
+
+  /* ...and "don't" stamps it out */
+  .stamp {
+    display: inline-block;
+    color: var(--bad);
+    border: 0.08em solid currentColor;
+    border-radius: 0.12em;
+    padding: 0 0.14em;
+    transform: rotate(-5deg);
+    animation: stamp-down 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.85s backwards;
+  }
+  @keyframes stamp-down {
+    0%   { opacity: 0; transform: scale(2.6) rotate(-14deg); }
+    70%  { opacity: 1; transform: scale(0.94) rotate(-4deg); }
+    100% { opacity: 1; transform: scale(1) rotate(-5deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    h1 .selected { animation: none; background-size: 100% 100%; }
+    .stamp { animation: none; }
+  }
+  .tagline {
+    margin-top: 1.1rem;
+    font-size: 1.3rem;
+    color: var(--muted);
+  }
+
+  /* ---- prose ---- */
+  .prose p + p { margin-top: 1.1rem; }
+  .prose a { color: inherit; }
+
+  section { margin: 0 0 5rem; }
+
+  h2 {
+    font-family: var(--display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  h2 .no  { color: var(--bad); }
+  h2 .yes { color: var(--good); }
+
+  /* ---- example rows: chat left, text right ---- */
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (min-width: 55rem) {
+    .row { grid-template-columns: 26rem 1fr; gap: 3.5rem; }
+  }
+
+  /* ---- chat panel, Slack style ---- */
+  .chat {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .msg {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0.75rem;
+    padding: 0.55rem 1.1rem;
+  }
+  .avatar {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+  }
+  .avatar.a { background: var(--avatar-a); }
+  .avatar.b { background: var(--avatar-b); }
+  .msg-name { font-weight: 700; font-size: 0.92rem; }
+  .msg-time {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-left: 0.4rem;
+  }
+  .msg-text { margin-top: 0.05rem; overflow-wrap: anywhere; }
+
+  /* ---- footer ---- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 0 3.5rem;
+    color: var(--muted);
+    font-size: 1rem;
+    text-align: center;
+  }
+  footer p + p { margin-top: 0.5rem; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1><span class="stamp">don't</span> be a <span class="selected">meat&nbsp;proxy</span></h1>
+    <p class="tagline">please don't copy-paste AI answers at people</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="prose">
+    <p>Imagine asking a coworker a question. They turn around, whisper it to a
+    stranger in the hallway, then recite the stranger's answer back to you —
+    word for word, full of jargon neither of them understands, with total
+    confidence.</p>
+    <p>That's a <strong>meat proxy</strong>: a human who moves AI output from
+    one window into another and adds nothing but delay.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">❌</span> please don't do this</h2>
+    <div class="row">
+      <div class="chat" aria-label="Example of a bad chat exchange">
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Maya</span><span class="msg-time">2:15 PM</span>
+            <div class="msg-text">hey, do you know if we can carry unused vacation days over to next year?</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar b">🐨</div>
+          <div>
+            <span class="msg-name">Tom</span><span class="msg-time">2:17 PM</span>
+            <div class="msg-text">Great question! Vacation carry-over policies
+            vary significantly by organization and jurisdiction. Generally
+            speaking: (1)&nbsp;many employers operate a "use-it-or-lose-it"
+            policy, subject to local labor regulations; (2)&nbsp;statutory
+            minimum leave may be treated differently from contractual leave;
+            (3)&nbsp;in some jurisdictions, accrued unused leave must be paid
+            out upon termination. I'd recommend reviewing your employee
+            handbook or consulting your HR department. Let me know if you'd
+            like me to elaborate! 😊</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Maya</span><span class="msg-time">2:18 PM</span>
+            <div class="msg-text">so… can I or can't I?</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar b">🐨</div>
+          <div>
+            <span class="msg-name">Tom</span><span class="msg-time">2:19 PM</span>
+            <div class="msg-text">no idea, that's what the AI said 🤷</div>
+          </div>
+        </div>
+      </div>
+      <div class="prose">
+        <p>Maya asked Tom because he's been at the company longer — he might
+        actually know. What she got is a wall of text that nobody has read.
+        Including Tom. Maybe it's right, maybe it isn't — that's the problem:
+        neither of them can tell.</p>
+        <p>Maya still doesn't know if she can keep her vacation days. She has
+        three paragraphs of hedged "it depends" that could have been written
+        about any company, and it's now her job to find out which parts, if
+        any, are true. She asked a question and got homework.</p>
+        <p>If she'd wanted an AI's best guess, she'd have asked one herself —
+        it's one tab away. She asked a <em>person</em>, because a person can
+        check before answering and stand behind what they say. Skip that part
+        and you're not helping — you're a slower, lossier chatbot.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="yes">✅</span> instead, try this</h2>
+    <div class="row">
+      <div class="chat" aria-label="Example of a good chat exchange">
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Maya</span><span class="msg-time">2:15 PM</span>
+            <div class="msg-text">hey, do you know if we can carry unused vacation days over to next year?</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar b">🐨</div>
+          <div>
+            <span class="msg-name">Tom</span><span class="msg-time">2:26 PM</span>
+            <div class="msg-text">wasn't sure, so I checked the handbook (AI
+            found the section for me) — yes, up to 5 days, but you have to
+            use them by end of March. page 60 if you want the details</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Maya</span><span class="msg-time">2:27 PM</span>
+            <div class="msg-text">perfect, thank you! 🎉</div>
+          </div>
+        </div>
+      </div>
+      <div class="prose">
+        <p>Tom still used AI — and that's fine. Encouraged, even: it found
+        the right section of a 90-page PDF in seconds. The difference is what
+        happened before he hit send: he <strong>read</strong> that section,
+        <strong>made sure</strong> it actually answered the question, and
+        replied <strong>in his own words</strong>.</p>
+        <p>Eleven minutes instead of two. But Maya got an answer that's
+        actually about <em>their</em> company, from someone willing to stand
+        behind it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="prose">
+    <h2>"but it saves so much time!"</h2>
+    <p>It saves <em>your</em> time by spending the other person's. AI answers
+    are built to sound right: long, confident, sprinkled with terms you'd
+    have to look up. Forward one unread and you're not sharing knowledge —
+    you're outsourcing the fact-checking to the person who asked.</p>
+    <p>And it compounds. They paste your paste into their own AI to decode
+    it. Now two chatbots are talking to each other through two humans, and
+    nobody in the loop knows what's true.</p>
+    <p>Chat is just the obvious case. Send a report you haven't read, and
+    your reader becomes the first human ever to check your work. Ship code
+    you haven't read and pipe the reviewer's comments back into the AI, and
+    your reviewer is now the author — while you play modem.</p>
+    <p>So before you send anything an AI wrote for you: read it, understand
+    it, check it, then say it in your own words. If you can't explain it,
+    don't send it — "that's what the AI said" won't save you. You sent it.
+    It's yours.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>This is kinda only half serious. AI is great — use it all day. Just don't be a pipe. 🥩</p>
+    <p>Inspired by the blog post
+    <a href="https://gruhn.me/blog/2026-08-03/">“don't be a meat proxy”</a>
+    and by <a href="https://nohello.net/">nohello.net</a>.</p>
+    <p>This website is <a href="https://github.com/mbroton/dontbeameatproxy">open source on GitHub</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
