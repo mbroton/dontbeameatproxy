@@ -16,7 +16,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # creates the project on the first run; on later runs the create
-          # fails with "already exists" and is ignored
-          preCommands: npx wrangler pages project create dontbeameatproxy --production-branch=main || true
           command: pages deploy . --project-name=dontbeameatproxy --branch=main
