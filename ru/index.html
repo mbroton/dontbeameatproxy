@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Не будь мясным прокси</title>
+<meta name="description" content="Пожалуйста, не пересылайте людям ответы ИИ бездумно. Прочитайте, разберитесь, проверьте и ответьте своими словами.">
+<meta property="og:title" content="Не будь мясным прокси">
+<meta property="og:description" content="Пожалуйста, не пересылайте людям ответы ИИ бездумно. Прочитайте, разберитесь, проверьте и ответьте своими словами.">
+<meta property="og:url" content="https://dontbeameatproxy.com/ru/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Не будь мясным прокси">
+<meta property="og:image" content="https://dontbeameatproxy.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="«Не будь мясным прокси» — не пересылайте людям ответы ИИ бездумно (надпись на английском)">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ffffff">
+<link rel="alternate" hreflang="en" href="https://dontbeameatproxy.com/">
+<link rel="alternate" hreflang="ru" href="https://dontbeameatproxy.com/ru/">
+<link rel="canonical" href="https://dontbeameatproxy.com/ru/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥩</text></svg>">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root {
+    --ink: #1b1b1f;
+    --muted: #6f6f78;
+    --line: #eaeaef;
+    --select: #cde3ff;
+    --bad: #c2413b;
+    --good: #2f8f57;
+    --avatar-a: #fdeee6;
+    --avatar-b: #e6f0fd;
+    --display: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.125rem;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--select); }
+
+  .wrap {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---- header ---- */
+  header {
+    padding: 6.5rem 0 4rem;
+    text-align: center;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+  /* "meat proxy" gets selected for copying... */
+  h1 .selected {
+    padding: 0 0.12em;
+    border-radius: 3px;
+    background: linear-gradient(var(--select), var(--select)) no-repeat left center / 0% 100%;
+    animation: select-sweep 0.45s ease-out 0.2s forwards;
+  }
+  @keyframes select-sweep {
+    to { background-size: 100% 100%; }
+  }
+
+  /* ...and "don't" stamps it out */
+  .stamp {
+    display: inline-block;
+    color: var(--bad);
+    border: 0.08em solid currentColor;
+    border-radius: 0.12em;
+    padding: 0 0.14em;
+    transform: rotate(-5deg);
+    animation: stamp-down 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.85s backwards;
+  }
+  @keyframes stamp-down {
+    0%   { opacity: 0; transform: scale(2.6) rotate(-14deg); }
+    70%  { opacity: 1; transform: scale(0.94) rotate(-4deg); }
+    100% { opacity: 1; transform: scale(1) rotate(-5deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    h1 .selected { animation: none; background-size: 100% 100%; }
+    .stamp { animation: none; }
+  }
+  .tagline {
+    margin-top: 1.1rem;
+    font-size: 1.3rem;
+    color: var(--muted);
+  }
+
+  /* ---- prose ---- */
+  .prose p + p { margin-top: 1.1rem; }
+  .prose a { color: inherit; }
+
+  section { margin: 0 0 5rem; }
+
+  h2 {
+    font-family: var(--display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  h2 .no  { color: var(--bad); }
+  h2 .yes { color: var(--good); }
+
+  /* ---- example rows: chat left, text right ---- */
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (min-width: 55rem) {
+    .row { grid-template-columns: 26rem 1fr; gap: 3.5rem; }
+  }
+
+  /* ---- chat panel, Slack style ---- */
+  .chat {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .msg {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0.75rem;
+    padding: 0.55rem 1.1rem;
+  }
+  .avatar {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+  }
+  .avatar.a { background: var(--avatar-a); }
+  .avatar.b { background: var(--avatar-b); }
+  .msg-name { font-weight: 700; font-size: 0.92rem; }
+  .msg-time {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-left: 0.4rem;
+  }
+  .msg-text { margin-top: 0.05rem; overflow-wrap: anywhere; }
+
+  /* ---- footer ---- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 0 3.5rem;
+    color: var(--muted);
+    font-size: 1rem;
+    text-align: center;
+  }
+  footer p + p, footer nav + p { margin-top: 0.5rem; }
+  footer a { color: inherit; }
+  footer nav { margin-top: 0.5rem; }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Не будь мясным прокси","url":"https://dontbeameatproxy.com/ru/","inLanguage":"ru","description":"Пожалуйста, не пересылайте людям ответы ИИ бездумно. Прочитайте, разберитесь, проверьте и ответьте своими словами."}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1><span class="stamp">Не</span> будь <span class="selected">мясным прокси</span></h1>
+    <p class="tagline">пожалуйста, не пересылайте людям ответы ИИ бездумно</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="prose">
+    <p>Представьте: вы задаёте коллеге вопрос. Он поворачивается, шепчет его незнакомцу в коридоре, а потом с полной уверенностью пересказывает вам ответ слово в слово — с кучей терминов, которых ни он, ни незнакомец не понимают.</p>
+    <p>Вот что такое <strong>мясной прокси</strong>: человек, который переносит ответы ИИ из одного окна в другое, не добавляя ничего, кроме задержки.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">❌</span> пожалуйста, не делайте так</h2>
+    <div class="row">
+      <div class="chat" aria-label="Пример неудачной переписки">
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Майя</span><span class="msg-time">14:15</span>
+            <div class="msg-text">привет, ты знаешь, можно ли перенести неиспользованные дни отпуска на следующий год?</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar b">🐨</div>
+          <div>
+            <span class="msg-name">Том</span><span class="msg-time">14:17</span>
+            <div class="msg-text">Отличный вопрос! Правила переноса отпуска существенно различаются в зависимости от организации и юрисдикции. В общем случае:
+            (1)&nbsp;многие работодатели применяют правило «используй или потеряешь» с учётом местного трудового законодательства; (2)&nbsp;к минимальному отпуску, установленному законом, могут применяться иные правила, чем к отпуску, предусмотренному договором; (3)&nbsp;в некоторых юрисдикциях при увольнении полагается компенсация за накопленные неиспользованные дни отпуска. Рекомендую ознакомиться со справочником сотрудника или проконсультироваться с отделом кадров. Дайте знать, если хотите узнать подробнее! 😊</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Майя</span><span class="msg-time">14:18</span>
+            <div class="msg-text">то есть… могу или не могу?</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar b">🐨</div>
+          <div>
+            <span class="msg-name">Том</span><span class="msg-time">14:19</span>
+            <div class="msg-text">не знаю, так сказал ИИ 🤷</div>
+          </div>
+        </div>
+      </div>
+      <div class="prose">
+        <p>Майя спросила Тома, потому что он дольше работает в компании и вполне может знать ответ. А получила стену текста, которую никто не читал. Даже Том. Может, там всё верно, а может, нет. В этом и проблема: ни один из них не может это определить.</p>
+        <p>Майя всё ещё не знает, можно ли ей сохранить дни отпуска. Вместо ответа — три абзаца уклончивого «всё зависит от обстоятельств», которые подошли бы любой компании. Теперь ей самой предстоит выяснить, что из этого правда, если там вообще есть правда. Она задала вопрос и получила домашнее задание.</p>
+        <p>Если бы ей нужна была догадка ИИ, она бы спросила его сама — достаточно открыть соседнюю вкладку. Она спросила <em>человека</em>, потому что человек может сначала всё проверить и отвечать за свои слова. Пропустите этот шаг — и вместо помощи получится чат-бот, который отвечает медленнее и теряет информацию по дороге.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="yes">✅</span> вместо этого попробуйте так</h2>
+    <div class="row">
+      <div class="chat" aria-label="Пример удачной переписки">
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Майя</span><span class="msg-time">14:15</span>
+            <div class="msg-text">привет, ты знаешь, можно ли перенести неиспользованные дни отпуска на следующий год?</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar b">🐨</div>
+          <div>
+            <span class="msg-name">Том</span><span class="msg-time">14:26</span>
+            <div class="msg-text">не был уверен, поэтому заглянул в справочник сотрудника (ИИ нашёл нужный раздел) — да, можно перенести до 5 дней, но использовать их нужно до конца марта. подробности на странице 60</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar a">🦊</div>
+          <div>
+            <span class="msg-name">Майя</span><span class="msg-time">14:27</span>
+            <div class="msg-text">отлично, спасибо! 🎉</div>
+          </div>
+        </div>
+      </div>
+      <div class="prose">
+        <p>Том тоже воспользовался ИИ — и это нормально. Даже полезно: ИИ за секунды нашёл нужный раздел в PDF на 90 страниц. Разница в том, что Том сделал перед отправкой: <strong>прочитал</strong> раздел, <strong>убедился</strong>, что там есть ответ на вопрос, и ответил <strong>своими словами</strong>.</p>
+        <p>Одиннадцать минут вместо двух. Зато Майя получила ответ именно про <em>их</em> компанию от человека, который готов отвечать за свои слова.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="prose">
+    <h2>«но это же экономит столько времени!»</h2>
+    <p>Так вы экономите <em>своё</em> время за счёт чужого. Ответы ИИ устроены так, чтобы звучать убедительно: длинные, уверенные, с россыпью терминов, значения которых ещё придётся выяснять. Пересылая такой ответ не читая, вы не делитесь знаниями — вы перекладываете проверку фактов на того, кто задал вопрос.</p>
+    <p>Дальше — больше. Собеседник вставляет пересланный вами текст в свой ИИ, чтобы разобраться, что там написано. Теперь два чат-бота общаются через двух людей, и никто в этой цепочке не знает, где правда.</p>
+    <p>Переписка — лишь самый очевидный пример. Отправьте непрочитанный отчёт — и читатель станет первым человеком, который проверит вашу работу. Сдайте код, который не читали, а замечания ревьюера передайте обратно ИИ — и автором кода окажется ревьюер, пока вы работаете модемом.</p>
+    <p>Поэтому прежде чем отправлять что-либо, написанное за вас ИИ, прочитайте, разберитесь, проверьте и изложите своими словами. Если не можете объяснить — не отправляйте. «Так сказал ИИ» вас не оправдывает. Это отправили вы. Вам и отвечать.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>ИИ — отличная штука, пользуйтесь им сколько угодно. Только не будьте передаточным звеном. 🥩</p>
+    <p>На создание сайта вдохновили статья
+    <a href="https://gruhn.me/blog/2026-08-03/">«Не будь мясным прокси»</a>
+    и сайт <a href="https://nohello.net/ru/">nohello.net</a>.</p>
+    <nav aria-label="Язык">
+      <a href="/" lang="en" hreflang="en">English</a> / <a href="/ru/" lang="ru" hreflang="ru" aria-current="page">Русский</a>
+    </nav>
+    <p>Исходный код сайта <a href="https://github.com/mbroton/dontbeameatproxy">открыт на GitHub</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
